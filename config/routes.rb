@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root "makeups#index"
 
+  # MAKEUP ROUTES
+
   get '/makeups/:id', to: 'makeups#show'
   get '/makeups', to: 'makeups#index'
   post '/makeups', to: 'makeups#create'
@@ -14,4 +16,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  # FAVORITES ROUTES
+  get '/favorite/:id', to: 'favorites#show'
+  get '/favorites', to: 'favorites#index'
+
+  # COMPANIES ROUTES
+  get '/company/:id', to: 'companies#show'
+  get '/companies', to: 'companies#index'
 end
+
