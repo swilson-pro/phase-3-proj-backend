@@ -9,32 +9,44 @@
 require 'rest-client'
 
 Makeup.destroy_all
+Company.destroy_all
+
 puts "seeding data..."
 
     url = "https://makeup-api.herokuapp.com/api/v1/products.json"
     response = RestClient.get(url)
-    makeups = JSON.parse(response)
+    makeups_array = JSON.parse(response)
 
-    makeups.each do |makeup|
-        Makeup.create!(
-            name: makeup["name"],
-            brand: makeup["brand"],
-            price: makeup["price"],
-            image_link: makeup["image_link"],
-            description: makeup["description"],
-            rating: makeup["rating"],
-            product_type: makeup["product_type"]
-        )
+makeups_array.each do |makeup|
+    Makeup.create!(
+        name: makeup["name"],
+        brand: makeup["brand"],
+        price: makeup["price"],
+        image_link: makeup["image_link"],
+        description: makeup["description"],
+        rating: makeup["rating"],
+        product_type: makeup["product_type"]
+    )
+end
+
+makeupbrands_array = Makeup.all.pluck(:brand).uniq
+clean_brands = makeupbrands_array.compact
+
+clean_brands.each do |brand|
+    Company.create!(name: brand)
+end
+
+makeups_array.each do |makeup|
+    a = rand(0..1)
+    if a == 1 then
+    Favorite.create(
+        makeup_id: Makeup.all.sample.id,
+        company_id: Company.all.sample.id
+    )
+    else puts "no favorite here"
     end
+end
 
-
-    Company.create!([
-       {name: "Chanel"}, {name: "colourpop"}, {name: "maybelline"}
-])
-
-# favorites_array = 25.times do
-#     Company.create(name: "Chanel")
-# end
 
 
 puts "🌱 Done seeding!"
