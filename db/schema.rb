@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_22_213343) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_22_213158) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -18,14 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_213343) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.string "brand"
-    t.string "name"
-    t.float "price"
-    t.string "image_link"
-    t.text "description"
-    t.integer "rating"
-    t.string "category"
-    t.string "product_type"
+    t.integer "makeup_id"
+    t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,18 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_213343) do
     t.integer "rating"
     t.string "category"
     t.string "product_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "newproducts", force: :cascade do |t|
-    t.string "brand"
-    t.string "name"
-    t.float "price"
-    t.string "image_link"
-    t.text "description"
-    t.integer "rating"
-    t.string "product_type"
+    t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
