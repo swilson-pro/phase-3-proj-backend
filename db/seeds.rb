@@ -27,4 +27,8 @@ puts "seeding data..."
         )
     end
 
+    Company.create!([
+       {name: "Chanel"}, {name: "colourpop"}, {name: "maybelline"}
+])
+
 puts "🌱 Done seeding!"
