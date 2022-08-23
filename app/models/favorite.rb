@@ -1,4 +1,4 @@
 class Favorite < ApplicationRecord
-    belongs_to company
-    belongs_to makeup
+    belongs_to :company
+    belongs_to :makeup
 end

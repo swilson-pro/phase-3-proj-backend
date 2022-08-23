@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 require 'rest-client'
+
 Makeup.destroy_all
 puts "seeding data..."
 
