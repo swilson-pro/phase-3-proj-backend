@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  resources :companies
-  resources :favorites
-  resources :makeups
-  #get '/makeups', to: "makeups#get_makeups"
-  # get '/brand', to: "makeups#get_brand"
-  # get '/product_type', to: "makeups#get_product_type"
-  # get '/prod_brand', to: "makeups#get_prod_brand"
+
+  root "makeups#index"
+
+  get '/makeups/:id', to: 'makeups#show'
+  get '/makeups', to: 'makeups#index'
+  post '/makeups', to: 'makeups#create'
+  patch 'makeups/:id', to: 'makeups#update'
+  delete 'makeups/:id', to: 'makeups#destroy'
+  get '/brand', to: "makeups#get_brand" # http://localhost:4000/makeups?brand=maybelline
+  get '/product_type', to: "makeups#get_product_type" # http://localhost:4000/makeups?brand=maybelline&product_type=lipstick
+  get '/prod_brand', to: "makeups#get_prod_brand"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

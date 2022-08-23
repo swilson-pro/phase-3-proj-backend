@@ -9,20 +9,60 @@ class MakeupsController < ApplicationController
         else
             makeups = Makeup.all
         end
+        render json: makeups
+    end
 
+    def show
+        makeups = Makeup.find(params[:id])
+        render json: makeups
+    end
+
+    def create
+        makeups = Makeup.create(
+            brand: params[:brand],
+            name: params[:name],
+            price: params[:price],
+            image_link: params[:image_link],
+            description: params[:description],
+            rating: params[:rating],
+            category: params[:category],
+            product_type: params[:product_type],
+            company_id: params[:company_id]
+            )
+        render json: makeups
+    end
+    
+    def makeup_params
+        params.permit(:brand, :name, :price, :image_link, :description, :rating, :category, :product_type, :company_id)
+    end
+    
+    def update
+        makeups = Makeup.find(params[:id])
+        makeups.update( brand: params[:brand],
+            name: params[:name],
+            price: params[:price],
+            image_link: params[:image_link],
+            description: params[:description],
+            rating: params[:rating],
+            category: params[:category],
+            product_type: params[:product_type],
+            company_id: params[:company_id]
+            )
+            redirect_to makeups_path
+    end
+
+    def destroy
+        makeups = Makeup.find(params[:id])
+        makeups.destroy
         render json: makeups
     end
 end
 
 
-require 'rest-client'
-    # def create
-    #     Makeup.create(
-    #         image_link: params[:image_link]
-    #         name: params[:name]
-    #     )
-    # end
 
+
+# require 'rest-client'
+    
     # def get_prod_brand
     #     makeups = Makeup.where(product_type: params[:product_type], brand: params[:brand])
     #     render json: makeups # like this: http://localhost:4000/prod_brand?product_type=lipstick&brand=maybelline
