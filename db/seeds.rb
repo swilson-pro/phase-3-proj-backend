@@ -13,9 +13,9 @@ puts "seeding data..."
 
     url = "https://makeup-api.herokuapp.com/api/v1/products.json"
     response = RestClient.get(url)
-    makeups_array = JSON.parse(response)
+    makeups = JSON.parse(response)
 
-    makeups_array.each do |makeup|
+    makeups.each do |makeup|
         Makeup.create!(
             name: makeup["name"],
             brand: makeup["brand"],
@@ -26,5 +26,9 @@ puts "seeding data..."
             product_type: makeup["product_type"]
         )
     end
+
+# favorites_array = 25.times do
+#     Company.create(name: "Chanel")
+# end
 
 puts "🌱 Done seeding!"
