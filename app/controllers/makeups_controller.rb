@@ -18,7 +18,7 @@ class MakeupsController < ApplicationController
     end
 
     def create
-        makeups = Makeup.create(
+        makeups = Makeup.create!(
             brand: params[:brand],
             name: params[:name],
             price: params[:price],
@@ -32,9 +32,9 @@ class MakeupsController < ApplicationController
         render json: makeups
     end
     
-    def makeup_params
-        params.permit(:brand, :name, :price, :image_link, :description, :rating, :category, :product_type, :company_id)
-    end
+    # def makeup_params
+    #     params.permit(:brand, :name, :price, :image_link, :description, :rating, :category, :product_type, :company_id)
+    # end
     
     def update
         makeups = Makeup.find(params[:id])

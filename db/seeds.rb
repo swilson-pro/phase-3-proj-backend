@@ -10,6 +10,7 @@ require 'rest-client'
 
 Makeup.destroy_all
 Company.destroy_all
+Favorite.destroy_all
 
 puts "seeding data..."
 

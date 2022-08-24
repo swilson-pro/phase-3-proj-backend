@@ -20,9 +20,16 @@ Rails.application.routes.draw do
   # FAVORITES ROUTES
   get '/favorite/:id', to: 'favorites#show'
   get '/favorites', to: 'favorites#index'
+  post '/favorites', to: 'favorites#create'
+  patch '/favorites/:id', to: 'favorites#update'
+  delete '/favorites/:id', to: 'favorites#destroy'
+
 
   # COMPANIES ROUTES
   get '/company/:id', to: 'companies#show'
   get '/companies', to: 'companies#index'
+  post '/companies', to: 'companies#create'
+  patch '/companies/:id', to: 'companies#update'
+  delete '/companies/:id', to: 'companies#destroy'
 end
 
