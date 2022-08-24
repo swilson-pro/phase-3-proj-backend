@@ -1,6 +1,6 @@
-import React from "react"
+import MakeupCard from './MakeupCard'
 
-function Home(){
+function Home({makeups}){
     return(
         <main>
             <div className='filter-div'>
@@ -10,6 +10,11 @@ function Home(){
                 <label htmlFor='prodtypes'>Choose Product Type:</label>
                 <select name='prodtypes' id='prodtypes'></select>
             </div>
+            <ul className='cards'>
+                {makeups.map((makeup) => {
+                    return <MakeupCard makeup={makeup}/>
+                })}
+            </ul>
         </main>
     )
 }
