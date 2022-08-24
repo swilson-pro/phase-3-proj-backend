@@ -51,6 +51,11 @@ class MakeupsController < ApplicationController
             redirect_to makeups_path
     end
 
+    def get_product_types
+        product_types_array = Makeup.all.pluck(:product_type).uniq
+        render json: product_types_array
+    end
+
     def destroy
         makeups = Makeup.find(params[:id])
         makeups.destroy

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   delete 'makeups/:id', to: 'makeups#destroy'
   get '/brand', to: "makeups#get_brand" # http://localhost:4000/makeups?brand=maybelline
   get '/product_type', to: "makeups#get_product_type" # http://localhost:4000/makeups?brand=maybelline&product_type=lipstick
-  get '/prod_brand', to: "makeups#get_prod_brand"
+  # get '/prod_brand', to: "makeups#get_prod_brand"
+  get '/show_product_types', to: "makeups#get_product_types"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
