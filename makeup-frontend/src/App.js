@@ -14,16 +14,23 @@ function App() {
   const [companies, setCompanies] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
   const [brand, setBrand] = useState('maybelline');
+  const [prodType, setProdType] = useState('lipstick')
   
 
 
-  const fetchMakeups = async(brand) => {
+  const fetchMakeups = async(brand, prodType) => {
 
     const checkBrand = () => {
-      return brand ? `brand=${brand}` : ""
+      return brand ? `&brand=${brand}` : ""
     }
 
-    const response = await fetch(`${url}makeups?${checkBrand()}`);
+    const checkProdType = () => {
+      return prodType ? `&product_type=${prodType}` : ""
+    }
+
+    console.log('checkProdType()', checkProdType())
+    const response = await fetch(`${url}makeups?&${checkBrand()}&${checkProdType()}`)
+    // const response = await fetch(`${url}makeups?${checkBrand()}${checkProdType()}`);
     
     const makeupsArray = await response.json();
     setMakeups(makeupsArray);
@@ -44,13 +51,17 @@ function App() {
   }
 
   useEffect(() => {
-    fetchMakeups(brand)
+    fetchMakeups(brand, prodType)
     fetchBrands()
     fetchProductTypes()
-  }, [brand])
+  }, [brand, prodType])
 
   function updateBrand(e) {
     setBrand(e.target.value)
+  }
+
+  function updateProdType(e) {
+    setProdType(e.target.value)
   }
 
   console.log("makeups", makeups)
@@ -71,7 +82,7 @@ function App() {
         <Route path='/newproductform'>
           <NewProductForm />
         </Route> */}
-        <Route path='/' element={<Home makeups={makeups} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand}/>} />
+        <Route path='/' element={<Home makeups={makeups} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType}/>} />
       </Routes>
 
     </div>
