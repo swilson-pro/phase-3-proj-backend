@@ -33,7 +33,6 @@ function App() {
       return prodType ? `&product_type=${prodType}` : ""
     }
 
-    console.log('checkProdType()', checkProdType())
     const response = await fetch(`${url}makeups?&${checkBrand()}&${checkProdType()}`)
     // const response = await fetch(`${url}makeups?${checkBrand()}${checkProdType()}`);
     
@@ -56,11 +55,12 @@ function App() {
   }
 
   const fetchFavoritesList = async () => {
-    let favoriteList = []
+    // let favoriteList = []
     const response = await fetch(`${url}/favorites`);
     const favoritesArray = await response.json();
-    favoritesArray.forEach((favorite) => favoriteList.push(favorite))
-    setFavorites(favoriteList)
+    // favoritesArray.forEach((favorite) => favoriteList.push(favorite))
+    // setFavorites(favoriteList)
+    setFavorites(favoritesArray)
   }
 
   useEffect(() => {
@@ -69,6 +69,8 @@ function App() {
     fetchBrands()
     fetchProductTypes()
   }, [brand, prodType])
+  
+
 
   const newDisplayedList = makeups.filter(makeup => {
     return makeup.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -86,7 +88,15 @@ function App() {
   console.log("makeups", makeups)
   console.log("companies", companies)
   console.log("productTypes", productTypes)
-  // console.log('favorites', favorites)
+  console.log('favorites', favorites)
+
+  const removeFavorite = (id) => {
+    const updatedFavorites = favorites.filter((fave) => fave.fave_id != id);
+    // console.log('favorites', favorites)
+    console.log('updatedFavorites', updatedFavorites)
+    console.log('FAVORITE REMOVED: ID', id)
+    setFavorites(updatedFavorites)
+  }
 
   // login
   const handleSubmit = async (e) => {
@@ -123,13 +133,16 @@ function App() {
       }
     }
 // end login
+
+
+
   }
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
-         <Route path='/favorites' element={<Favorites favorites={favorites}/>}/>
+         <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url}/>}/>
          <Route path='/myproducts' element={<MyProducts />}/>
          <Route path='/newproductform' element={<NewProductForm />}/>
         <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>} />
