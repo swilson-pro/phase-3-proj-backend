@@ -5,6 +5,8 @@ import NavBar from "./NavBar"
 import React, { useState, useEffect } from 'react'
 import Home from './Home'
 import Favorites from './Favorites'
+import MyProducts from './MyProducts';
+import NewProductForm from './NewProductForm';
 
 const url = 'http://localhost:3200/'
 
@@ -73,6 +75,8 @@ function App() {
       <NavBar />
       <Routes>
          <Route path='/favorites' element={<Favorites />}/>
+         <Route path='/myproducts' element={<MyProducts />}/>
+         <Route path='/newproductform' element={<NewProductForm />}/>
         {/*<Route path='/savedproducts'>
           <Savedproducts />
         </Route>

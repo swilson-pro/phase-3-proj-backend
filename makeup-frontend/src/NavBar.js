@@ -6,6 +6,8 @@ function NavBar() {
         <div className='nav'>
             <NavLink className='NavButton' to='/'><button>Home</button></NavLink>
             <NavLink className='NavButton' to='/favorites'><button>Favorites</button></NavLink>
+            <NavLink className='NavButton' to='/myproducts'><button>My Products</button></NavLink>
+            <NavLink className='NavButton' to='/newproductform'><button>Create New Product</button></NavLink>
         </div>
     )
 }
