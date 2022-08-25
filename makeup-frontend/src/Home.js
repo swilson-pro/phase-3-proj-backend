@@ -1,17 +1,15 @@
 import MakeupCard from './MakeupCard'
 
-function Home({makeups, companies, productTypes}){
+function Home({makeups, companies, productTypes, updateBrand, brand}){
     return(
         <main>
             <div className='filter-div'>
                 <label htmlFor='brands'>Choose Brand:</label>
-                <select name='brands' id='brands'>
+                <select name='brands' id='brands' onChange={updateBrand} value={brand}>
                     {companies.map((company) => {
                         return <option value={company}>{company}</option>
                     })}    
                 </select>
-
-
 
                 <label htmlFor='prodtypes'>Choose Product Type:</label>
                 <select name='prodtypes' id='prodtypes'>

@@ -13,10 +13,18 @@ function App() {
   const [makeups, setMakeups] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
+  const [brand, setBrand] = useState('maybelline');
   
 
-  const fetchMakeups = async() => {
-    const response = await fetch(url);
+
+  const fetchMakeups = async(brand) => {
+
+    const checkBrand = () => {
+      return brand ? `brand=${brand}` : ""
+    }
+
+    const response = await fetch(`${url}makeups?${checkBrand()}`);
+    
     const makeupsArray = await response.json();
     setMakeups(makeupsArray);
   }
@@ -36,10 +44,14 @@ function App() {
   }
 
   useEffect(() => {
-    fetchMakeups()
+    fetchMakeups(brand)
     fetchBrands()
     fetchProductTypes()
-  }, [])
+  }, [brand])
+
+  function updateBrand(e) {
+    setBrand(e.target.value)
+  }
 
   console.log("makeups", makeups)
   console.log("companies", companies)
@@ -59,7 +71,7 @@ function App() {
         <Route path='/newproductform'>
           <NewProductForm />
         </Route> */}
-        <Route path='/' element={<Home makeups={makeups} companies={companies} productTypes={productTypes}/>} />
+        <Route path='/' element={<Home makeups={makeups} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand}/>} />
       </Routes>
 
     </div>

@@ -61,6 +61,11 @@ class MakeupsController < ApplicationController
         makeups.destroy
         render json: makeups
     end
+    def get_brand
+        makeups = Makeup.where(brand: params[:brand])
+        render json: makeups # run http://localhost:4000/brand?brand=colourpop
+    end
+
 end
 
 
@@ -76,10 +81,7 @@ end
     #     makeups = Makeup.where(product_type: params[:product_type])
     #     render json: makeups
     # end
-    # def get_brand
-    #     makeups = Makeup.where(brand: params[:brand])
-    #     render json: makeups # run http://localhost:4000/brand?brand=colourpop
-    # end
+
     # def get_makeups
     #     makeups = Makeup.all
     #     render json: makeups
