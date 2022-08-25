@@ -1,8 +1,7 @@
-
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from "./NavBar"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Home from './Home'
 import Favorites from './Favorites'
 import MyProducts from './MyProducts';
@@ -12,6 +11,7 @@ const url = 'http://localhost:3200/'
 
 
 function App() {
+  const form = useRef()
   const [makeups, setMakeups] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [favorites, setFavorites] = useState([]);
@@ -88,6 +88,43 @@ function App() {
   console.log("productTypes", productTypes)
   // console.log('favorites', favorites)
 
+  // login
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const data = new FormData(form.current)
+    let req = await fetch('http://localhost:3200/login', {
+      method: 'POST',
+      body: data
+    })
+    let res = await req.json()
+    if (req.ok) {
+      console.log('Company', res)
+      alert('You have logged in')
+    } else {
+      alert('Invalid email/password')
+    }
+  }
+  const [name, setName] = useState('')
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault()
+    let req = await fetch('http://localhost:3100/forgot_password', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: name})
+    })
+    if (req.ok) {
+      let res = await req.json()
+      let securityQuestion = window.confirm("Check your company name and try again")
+      if (securityQuestion) {
+        alert(`Your password is: ${res.password}`)
+      } else {
+        alert("Try again.")
+      }
+    }
+// end login
+  }
+
   return (
     <div className="App">
       <NavBar />
@@ -97,9 +134,23 @@ function App() {
          <Route path='/newproductform' element={<NewProductForm />}/>
         <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>} />
       </Routes>
-
+      <h2>Log in</h2>
+      <form onSubmit={handleSubmit} ref={form}>
+        <input name="Company Name" type="email" placeholder='Company Name' /><br />
+        <input name="password" type="password" placeholder='Password' /><br />
+        <input type="submit" />
+      </form>
+      <h2>Forgot your password?</h2>
+      <p>
+        Fill out the form below and complete the security questions
+        to recover your account!
+      </p>
+      <form onSubmit={handleForgotPassword}>
+        <input type="Company Name" placeholder='Enter your Company Name' onChange={(e) => { setName(e.target.value) }} />
+        <input type="submit" />
+      </form>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

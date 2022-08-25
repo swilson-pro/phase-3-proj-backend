@@ -25,4 +25,19 @@ class CompaniesController < ApplicationController
         companies.destroy
         render json: companies
     end
+
+    def login
+        # in every single request, there exists the params hash
+        company = Company.find_by!(name: params[:name])
+        if company && company.password_digest == params[:password]
+          render json: company, status: :ok
+        else
+          render json: {error: 'Invalid Company passowrd'}, status: 404
+        end
+    
+        def forgot_password
+          company = Company.find_by!(name: params[:name])
+          render json: {password: company.password_digest}, status: :ok
+        end
+      end
 end

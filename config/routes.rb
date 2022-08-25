@@ -32,5 +32,7 @@ Rails.application.routes.draw do
   post '/companies', to: 'companies#create'
   patch '/companies/:id', to: 'companies#update'
   delete '/companies/:id', to: 'companies#destroy'
+  post '/login', to: 'companies#login'
+  post '/forgot_password', to: 'companies#forgot_password'
 end
 
