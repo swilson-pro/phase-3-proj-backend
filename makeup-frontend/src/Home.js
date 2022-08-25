@@ -1,6 +1,7 @@
 import MakeupCard from './MakeupCard'
+import Search from './Search'
 
-function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType}){
+function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm}){
     return(
         <main>
             <div className='filter-div'>
@@ -18,6 +19,7 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
                     })}
                 </select>
             </div>
+            <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
             <ul className='cards'>
                 {makeups.map((makeup) => {
                     return <MakeupCard makeup={makeup}/>

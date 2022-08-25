@@ -18,6 +18,8 @@ function App() {
   const [productTypes, setProductTypes] = useState([]);
   const [brand, setBrand] = useState('maybelline');
   const [prodType, setProdType] = useState('lipstick')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [displayedList, setDisplayedList] = useState([])
   
 
 
@@ -68,6 +70,11 @@ function App() {
     fetchProductTypes()
   }, [brand, prodType])
 
+  const newDisplayedList = makeups.filter(makeup => {
+    return makeup.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+
   function updateBrand(e) {
     setBrand(e.target.value)
   }
@@ -88,7 +95,7 @@ function App() {
          <Route path='/favorites' element={<Favorites favorites={favorites}/>}/>
          <Route path='/myproducts' element={<MyProducts />}/>
          <Route path='/newproductform' element={<NewProductForm />}/>
-        <Route path='/' element={<Home makeups={makeups} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType}/>} />
+        <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>} />
       </Routes>
 
     </div>
