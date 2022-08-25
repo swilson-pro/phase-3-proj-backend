@@ -98,6 +98,12 @@ function App() {
     setFavorites(updatedFavorites)
   }
 
+  const newFavorite = (newFave) => {
+    const updatedFavoritesArray = [...favorites, newFave]
+    setFavorites(updatedFavoritesArray)
+    // console.log('newFavorite function has been called.')
+  }
+
   // login
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -145,7 +151,7 @@ function App() {
          <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url}/>}/>
          <Route path='/myproducts' element={<MyProducts />}/>
          <Route path='/newproductform' element={<NewProductForm />}/>
-        <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>} />
+        <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url}/>} />
       </Routes>
       <h2>Log in</h2>
       <form onSubmit={handleSubmit} ref={form}>

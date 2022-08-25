@@ -1,7 +1,8 @@
 import MakeupCard from './MakeupCard'
 import Search from './Search'
+import {v4 as uuidv4} from 'uuid'
 
-function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm}){
+function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm, removeFavorite, newFavorite, url}){
     return(
         <main>
             <div className='filter-div'>
@@ -19,10 +20,17 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
                     })}
                 </select>
             </div>
+
             <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+
             <ul className='cards'>
                 {makeups.map((makeup) => {
-                    return <MakeupCard makeup={makeup}/>
+                    return <MakeupCard 
+                    key={uuidv4()}
+                    removeFavorite={removeFavorite}
+                    newFavorite={newFavorite}
+                    makeup={makeup}
+                    url={url}/>
                 })}
             </ul>
         </main>

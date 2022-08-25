@@ -41,7 +41,7 @@ makeups_array.each do |makeup|
     a = rand(0..1)
     if a == 1 then
     Favorite.create(
-        makeup_id: Makeup.all.sample.id,
+        makeup_id: Makeup.all.sample.id, # The error came from when we changed this to makeup.id
         company_id: Company.all.sample.id
     )
     else puts "no favorite here"

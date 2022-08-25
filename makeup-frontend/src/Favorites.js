@@ -1,8 +1,10 @@
 import FavoritesCard from "./FavoritesCard"
+import {useState} from 'react'
 
 
 function Favorites({favorites, removeFavorite, url}) {
-    // console.log('favorites', favorites)
+
+    
     return (
         <main>
             <ul className='cards'>
