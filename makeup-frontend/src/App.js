@@ -1,9 +1,9 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import NavBar from "./NavBar"
-import React, { useState, useEffect, useRef } from 'react'
-import Home from './Home'
-import Favorites from './Favorites'
+import NavBar from "./NavBar";
+import React, { useState, useEffect, useRef } from 'react';
+import Home from './Home';
+import Favorites from './Favorites';
 import MyProducts from './MyProducts';
 import NewProductForm from './NewProductForm';
 
@@ -108,7 +108,7 @@ function App() {
 
   const handleForgotPassword = async (e) => {
     e.preventDefault()
-    let req = await fetch('http://localhost:3100/forgot_password', {
+    let req = await fetch('http://localhost:3200/forgot_password', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({name: name})
