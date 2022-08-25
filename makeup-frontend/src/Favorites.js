@@ -1,8 +1,16 @@
+import FavoritesCard from "./FavoritesCard"
 
 
-function Favorites() {
+function Favorites({favorites}) {
+    console.log('favorites', favorites)
     return (
-        <div>Favorites!</div>
+        <main>
+            <ul className='cards'>
+                {favorites.map((favorite) => {
+                    return <FavoritesCard favorite={favorite}/>
+                })}
+            </ul>
+        </main>
     )
 }
 

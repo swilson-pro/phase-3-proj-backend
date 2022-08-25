@@ -14,6 +14,7 @@ const url = 'http://localhost:3200/'
 function App() {
   const [makeups, setMakeups] = useState([]);
   const [companies, setCompanies] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
   const [brand, setBrand] = useState('maybelline');
   const [prodType, setProdType] = useState('lipstick')
@@ -52,8 +53,17 @@ function App() {
     setProductTypes(productTypesArray)
   }
 
+  const fetchFavoritesList = async () => {
+    let favoriteList = []
+    const response = await fetch(`${url}/favorites`);
+    const favoritesArray = await response.json();
+    favoritesArray.forEach((favorite) => favoriteList.push(favorite))
+    setFavorites(favoriteList)
+  }
+
   useEffect(() => {
     fetchMakeups(brand, prodType)
+    fetchFavoritesList()
     fetchBrands()
     fetchProductTypes()
   }, [brand, prodType])
@@ -69,23 +79,15 @@ function App() {
   console.log("makeups", makeups)
   console.log("companies", companies)
   console.log("productTypes", productTypes)
+  // console.log('favorites', favorites)
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
-         <Route path='/favorites' element={<Favorites />}/>
+         <Route path='/favorites' element={<Favorites favorites={favorites}/>}/>
          <Route path='/myproducts' element={<MyProducts />}/>
          <Route path='/newproductform' element={<NewProductForm />}/>
-        {/*<Route path='/savedproducts'>
-          <Savedproducts />
-        </Route>
-        <Route path='/myproducts'>
-          <MyProducts />
-        </Route>
-        <Route path='/newproductform'>
-          <NewProductForm />
-        </Route> */}
         <Route path='/' element={<Home makeups={makeups} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType}/>} />
       </Routes>
 

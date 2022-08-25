@@ -5,7 +5,25 @@ class FavoritesController < ApplicationController
     end
     def index
         favorites = Favorite.all
-        render json: favorites
+        favemap = favorites.map do |fave|
+            favehash = {
+                fave_id: fave.id, 
+                makeup_id: fave.makeup.id, 
+                company_id: fave.company.id, 
+                brand: fave.makeup.brand,
+                name: fave.makeup.name,
+                price: fave.makeup.price,
+                image_link: fave.makeup.image_link,
+                description: fave.makeup.description,
+                rating: fave.makeup.rating,
+                category: fave.makeup.category,
+                product_type: fave.makeup.product_type
+            }
+            # fave.makeup # 
+            # Makeup.find_by(id: fave.id)
+            favehash
+        end
+        render json: favemap
     end
 
     def create
