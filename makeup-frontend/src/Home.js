@@ -5,23 +5,38 @@ import {v4 as uuidv4} from 'uuid'
 function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm, removeFavorite, newFavorite, url, favorites}){
     return(
         <main>
+            <br></br>
+            <div className='filter'>
             <div className='filter-div'>
-                <label htmlFor='brands'>Choose Brand:</label>
-                <select name='brands' id='brands' onChange={updateBrand} value={brand}>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <label htmlFor='brands'>Choose Brand:&nbsp;&nbsp;</label>
+                <select className="choosebox" name='brands' id='brands' onChange={updateBrand} value={brand}>
                     {companies.map((company) => {
                         return <option value={company}>{company}</option>
                     })}    
                 </select>
-
-                <label htmlFor='prodtypes'>Choose Product Type:</label>
-                <select name='prodtypes' id='prodtypes' onChange={updateProdType} value={prodType}>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label htmlFor='prodtypes'>Choose Product Type:&nbsp;&nbsp;</label>
+                <select className="choosebox" name='prodtypes' id='prodtypes' onChange={updateProdType} value={prodType}>
                     {productTypes.map((productType) => {
                         return <option value={productType}>{productType}</option>
                     })}
                 </select>
             </div>
-
+            
             <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+            <br></br>
+            <br></br>
+            <br></br>
+          
+            </div>
+            <hr></hr>
+            <br></br>
+            <br></br>
+            <br></br>
 
             <ul className='cards'>
                 {makeups.map((makeup) => {

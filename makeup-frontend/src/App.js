@@ -186,7 +186,7 @@ function App() {
         <Route path='/newproductform' element={<NewProductForm newProduct={newProduct}/>}/>
         <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url} favorites={favorites}/>} />
       </Routes>
-      <h2>Log in</h2>
+      {/* <h2>Log in</h2>
       <form onSubmit={handleSubmit} ref={form}>
         <input name="Company Name" type="email" placeholder='Company Name' /><br />
         <input name="password" type="password" placeholder='Password' /><br />
@@ -200,7 +200,7 @@ function App() {
       <form onSubmit={handleForgotPassword}>
         <input type="Company Name" placeholder='Enter your Company Name' onChange={(e) => { setName(e.target.value) }} />
         <input type="submit" />
-      </form>
+      </form> */}
     </div>
   )
 }

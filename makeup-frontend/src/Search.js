@@ -3,7 +3,7 @@ function Search({searchTerm, setSearchTerm}) {
     return (
         <div className='searchbar'>
             <label htmlFor='search'>Search Product by Keyword:</label>
-            <input
+            <input class='searchbox'
             type='text' 
             id='search'
             placeholder='type in here'

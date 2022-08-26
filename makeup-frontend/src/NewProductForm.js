@@ -39,6 +39,8 @@ function NewProductForm({newProduct}) {
   
     return ( 
     <div>
+      <br></br>
+      <br></br>
       <h2>New Product</h2>
       <form onSubmit={handleSubmit}>
         <input 
@@ -93,6 +95,7 @@ function NewProductForm({newProduct}) {
   
         {/* <textarea cols='200' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} /> */}
         <br/>
+        <br></br>
         <button type="submit">Add a Product</button>
       </form>
     </div>
