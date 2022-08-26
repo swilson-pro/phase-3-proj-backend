@@ -6,12 +6,10 @@ function MakeupC3 ({makeup, deleteProduct}) {
     console.log("description", description)
 
     const handleDeleteProduct = () => {
-        fetch(`http://localhost:3200/posts/${id}`, {
+        fetch(`http://localhost:3200/makeups/${id}`, {
             method: "DELETE",
         })
-
         deleteProduct(id)
-
 }
 
     return (
@@ -21,7 +19,6 @@ function MakeupC3 ({makeup, deleteProduct}) {
         <h3>Brand:{brand}</h3>
         <h3>Product Type:{product_type}</h3>
         <p>Price: {parseFloat(price)}</p>
-        <button onClick={handleDeleteProduct}>Delete</button>
         {description ? 
         <Collapse collapsed={true}>
             <div>
@@ -29,6 +26,7 @@ function MakeupC3 ({makeup, deleteProduct}) {
             </div>
         </Collapse>
         : <div>No description</div>}
+        <button onClick={handleDeleteProduct}>Delete</button>
         </li>
     )
 }

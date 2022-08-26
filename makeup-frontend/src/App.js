@@ -20,6 +20,7 @@ function App() {
   const [prodType, setProdType] = useState('lipstick')
   const [searchTerm, setSearchTerm] = useState('')
   const [displayedList, setDisplayedList] = useState([])
+  const [myProductsList, setMyProductsList] = useState([])
   
 
 
@@ -84,6 +85,41 @@ function App() {
     setProdType(e.target.value)
   }
 
+
+  // const newProduct = (newProd) => {
+  //   const makeupsArray = [...makeupsArray, newProd]
+  //   setMakeups(makeupsArray)
+  // }
+
+  const newProduct = (newProd) => {
+    const updatedProductsArray = [...myProductsList, newProd]
+    setMyProductsList(updatedProductsArray)
+  }
+
+  const deleteProduct = (id) => {
+    console.log('delete this product:', id)
+    const newlyUpdatedProductsArray = myProductsList.filter((item) => item.id !== id);
+    setMyProductsList(newlyUpdatedProductsArray)
+  }
+
+  // const fetchNewProducts = async() => {
+  //   const response = await fetch(`${url}/my_products`);
+  //   const myProductTypesArray = await response.json();
+  //   setMakeups(myProductTypesArray)
+  // }
+
+  // const prodListResponse = await fetch('http://localhost:3200/makeups')
+  // const myProductsListArray = await prodListResponse.json()
+  // setMyProductsList(myProductsListArray)
+  // const filteredplist = myProductsListArray.filter((makeup) => {
+  //     if (brand && makeup.brand !== brand) {
+  //       return false
+  //     }
+  //     if (prodType && makeup.prodType !== prodType) {
+  //       return false
+  //     } else return true
+  // })
+
   console.log("makeups", makeups)
   console.log("companies", companies)
   console.log("productTypes", productTypes)
@@ -145,9 +181,9 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
-         <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url}/>}/>
-         <Route path='/myproducts' element={<MyProducts />}/>
-         <Route path='/newproductform' element={<NewProductForm />}/>
+        <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url}/>}/>
+        <Route path='/myproducts' element={<MyProducts deleteProduct={deleteProduct} makeupList={myProductsList} />}/>
+        <Route path='/newproductform' element={<NewProductForm newProduct={newProduct}/>}/>
         <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url} favorites={favorites}/>} />
       </Routes>
       <h2>Log in</h2>
