@@ -55,11 +55,10 @@ function App() {
   }
 
   const fetchFavoritesList = async () => {
-    // let favoriteList = []
+
     const response = await fetch(`${url}/favorites`);
     const favoritesArray = await response.json();
-    // favoritesArray.forEach((favorite) => favoriteList.push(favorite))
-    // setFavorites(favoriteList)
+
     setFavorites(favoritesArray)
   }
 
@@ -92,7 +91,6 @@ function App() {
 
   const removeFavorite = (id) => {
     const updatedFavorites = favorites.filter((fave) => fave.fave_id != id);
-    // console.log('favorites', favorites)
     console.log('updatedFavorites', updatedFavorites)
     console.log('FAVORITE REMOVED: ID', id)
     setFavorites(updatedFavorites)
@@ -101,7 +99,6 @@ function App() {
   const newFavorite = (newFave) => {
     const updatedFavoritesArray = [...favorites, newFave]
     setFavorites(updatedFavoritesArray)
-    // console.log('newFavorite function has been called.')
   }
 
   // login
@@ -151,7 +148,7 @@ function App() {
          <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url}/>}/>
          <Route path='/myproducts' element={<MyProducts />}/>
          <Route path='/newproductform' element={<NewProductForm />}/>
-        <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url}/>} />
+        <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url} favorites={favorites}/>} />
       </Routes>
       <h2>Log in</h2>
       <form onSubmit={handleSubmit} ref={form}>

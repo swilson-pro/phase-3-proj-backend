@@ -44,7 +44,9 @@ class FavoritesController < ApplicationController
             redirect_to favorites_path
     end
     def destroy
-        favorites = Favorite.find(params[:id])
+        puts params[:id]
+        favorites = Favorite.find_by(makeup_id: params[:id])
+        puts favorites
         favorites.destroy
         render json: favorites
     end

@@ -1,24 +1,37 @@
 
 
-function MakeupCard ({makeup, removeFavorite, newFavorite, url}) {
+function MakeupCard ({makeup, removeFavorite, newFavorite, url, isNotFavorite}) {
+    
     const {id, brand, product_type, name, price, image_link, description, rating, category, company_id} = makeup
-    const isNotFavorite = true
 
 
-    const handleAddToFavorites = () => {
+    const handleAddToFavorites = (e) => {
+        e.preventDefault()
         fetch(`${url}favorites`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                name: name,
+                brand: brand,
+                image_link: image_link,
+                price: price,
                 makeup_id: id,
-                company_id: 1
+                company_id: 1,
+                description: description
             }),
         })
         .then((res) => res.json())
         .then(newMakeup => newFavorite(newMakeup))
         .catch(function() {console.log('catch error')});
+    }
+
+    const handleRemoveFromFavorites = () => {
+        fetch(`${url}favorites/${id}`, {
+            method: "DELETE",
+        })
+        removeFavorite(id)
     }
 
     return (
@@ -27,7 +40,8 @@ function MakeupCard ({makeup, removeFavorite, newFavorite, url}) {
             <h3>{name}</h3>
             <h4>{brand}</h4>
             <p>Price: {price}</p>
-            {isNotFavorite ? <button className="primary" onClick={handleAddToFavorites} >Add to Favorites</button> : <button>Remove from Favorites</button>}
+            {isNotFavorite ? <button className="primary" onClick={handleAddToFavorites} >Add to Favorites</button> : 
+            <button onClick={handleRemoveFromFavorites}>Remove from Favorites</button>}
             
         </li>
     )

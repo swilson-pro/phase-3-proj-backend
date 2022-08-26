@@ -2,7 +2,7 @@ import MakeupCard from './MakeupCard'
 import Search from './Search'
 import {v4 as uuidv4} from 'uuid'
 
-function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm, removeFavorite, newFavorite, url}){
+function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm, removeFavorite, newFavorite, url, favorites}){
     return(
         <main>
             <div className='filter-div'>
@@ -27,6 +27,7 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
                 {makeups.map((makeup) => {
                     return <MakeupCard 
                     key={uuidv4()}
+                    isNotFavorite={favorites.every((item) => {return item.makeup_id !== makeup.id})}
                     removeFavorite={removeFavorite}
                     newFavorite={newFavorite}
                     makeup={makeup}
