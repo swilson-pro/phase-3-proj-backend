@@ -9,7 +9,6 @@ class FavoritesController < ApplicationController
             favehash = {
                 fave_id: fave.id, 
                 makeup_id: fave.makeup.id, 
-                company_id: fave.company.id, 
                 brand: fave.makeup.brand,
                 name: fave.makeup.name,
                 price: fave.makeup.price,
@@ -27,7 +26,6 @@ class FavoritesController < ApplicationController
     end
 
     def create
-        
         favorites = Favorite.create!(
             makeup_id: params[:makeup_id],
             company_id: params[:company_id]
