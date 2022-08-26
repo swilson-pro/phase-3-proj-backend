@@ -16,8 +16,8 @@ function App() {
   const [companies, setCompanies] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-  const [brand, setBrand] = useState('maybelline');
-  const [prodType, setProdType] = useState('lipstick')
+  const [brand, setBrand] = useState('');
+  const [prodType, setProdType] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [displayedList, setDisplayedList] = useState([])
   const [myProductsList, setMyProductsList] = useState([])
@@ -27,15 +27,21 @@ function App() {
 
   const fetchMakeups = async(brand, prodType) => {
 
+
     const checkBrand = () => {
       return brand ? `&brand=${brand}` : ""
     }
+
 
     const checkProdType = () => {
       return prodType ? `&product_type=${prodType}` : ""
     }
 
-    const response = await fetch(`${url}makeups?&${checkBrand()}&${checkProdType()}&page=${page}`)
+console.log(checkBrand(),"checkBrand()")
+console.log(`${url}makeups?&${checkBrand()}&${checkProdType()}`, '`${url}makeups?&${checkBrand()}&${checkProdType()}`')
+
+
+    const response = await fetch(`${url}makeups?&${checkBrand()}&${checkProdType()}`) // &page=${page}
     // const response = await fetch(`${url}makeups?${checkBrand()}${checkProdType()}`);
     
     const makeupsArray = await response.json();

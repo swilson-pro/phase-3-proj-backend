@@ -14,7 +14,7 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
                 <br></br>
                 <label htmlFor='brands'>Choose Brand:&nbsp;&nbsp;</label>
                 <select className="choosebox" name='brands' id='brands' onChange={updateBrand} value={brand}>
-                    
+                    <option value="">All</option>
                     {companies.map((company) => {
                         return <option value={company}>{company}</option>
                     })}    
@@ -22,6 +22,7 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <label htmlFor='prodtypes'>Choose Product Type:&nbsp;&nbsp;</label>
                 <select className="choosebox" name='prodtypes' id='prodtypes' onChange={updateProdType} value={prodType}>
+                    <option value="">All</option>
                     {productTypes.map((productType) => {
                         return <option value={productType}>{productType}</option>
                     })}
