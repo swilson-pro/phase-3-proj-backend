@@ -33,10 +33,8 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
             <br></br>
             <br></br>
             <br></br>
-          
             </div>
             <hr></hr>
-            <br></br>
             <br></br>
             <br></br>
 
