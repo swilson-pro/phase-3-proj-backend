@@ -126,7 +126,7 @@ function App() {
   console.log('favorites', favorites)
 
   const removeFavorite = (id) => {
-    const updatedFavorites = favorites.filter((fave) => fave.fave_id != id);
+    const updatedFavorites = favorites.filter((fave) => fave.makeup_id != id);
     console.log('updatedFavorites', updatedFavorites)
     console.log('FAVORITE REMOVED: ID', id)
     setFavorites(updatedFavorites)
