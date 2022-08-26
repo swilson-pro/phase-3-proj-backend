@@ -17,6 +17,11 @@ class MakeupsController < ApplicationController
         render json: makeups
     end
 
+    # def show_my_products
+    #     makeups = Makeup.where(brand: company.name)
+    #     render json: makeups
+    # end
+
     def create
         makeups = Makeup.create!(
             brand: params[:brand],
