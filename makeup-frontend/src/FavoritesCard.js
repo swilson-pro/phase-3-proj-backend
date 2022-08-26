@@ -5,10 +5,15 @@ function FavoritesCard ({favorite, removeFavorite, id, url}) {
     const {brand, name, price, image_link, description} = favorite
 
     const handleRemoveFromFavorites = () => {
-        fetch(`${url}favorites/${id}`, {
+        fetch(`${url}favorites/${favorite.makeup_id}`, {
             method: "DELETE",
         })
-        removeFavorite(id)
+        .then(resp=> resp.json())
+        .then(data=>{
+            removeFavorite(data.makeup_id)
+            console.log(data)
+
+        })
     }
 
     return (

@@ -1,6 +1,6 @@
 
 
-function MakeupCard ({makeup, removeFavorite, newFavorite, url, isNotFavorite}) {
+function MakeupCard ({makeup, removeFavorite, newFavorite, url, isNotFavorite, ifImageError}) {
     
     const {id, brand, product_type, name, price, image_link, description, rating, category, company_id} = makeup
 
@@ -36,7 +36,7 @@ function MakeupCard ({makeup, removeFavorite, newFavorite, url, isNotFavorite}) 
 
     return (
         <li className='card'>
-            <img src={image_link} alt={name} />
+            <img src={image_link} alt={name} onError={() => ifImageError(id,makeup)} />
             <h3>{name}</h3>
             <h4>{brand}</h4>
             <p>Price: {price}</p>

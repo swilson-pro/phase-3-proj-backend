@@ -2,7 +2,7 @@ import MakeupCard from './MakeupCard'
 import Search from './Search'
 import {v4 as uuidv4} from 'uuid'
 
-function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm, removeFavorite, newFavorite, url, favorites}){
+function Home({makeups, companies, productTypes, updateBrand, brand, updateProdType, prodType, searchTerm, setSearchTerm, removeFavorite, newFavorite, url, favorites, ifImageError}){
     return(
         <main>
             <br></br>
@@ -14,6 +14,7 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
                 <br></br>
                 <label htmlFor='brands'>Choose Brand:&nbsp;&nbsp;</label>
                 <select className="choosebox" name='brands' id='brands' onChange={updateBrand} value={brand}>
+                    
                     {companies.map((company) => {
                         return <option value={company}>{company}</option>
                     })}    
@@ -45,6 +46,7 @@ function Home({makeups, companies, productTypes, updateBrand, brand, updateProdT
                     isNotFavorite={favorites.every((item) => {return item.makeup_id !== makeup.id})}
                     removeFavorite={removeFavorite}
                     newFavorite={newFavorite}
+                    ifImageError={ifImageError}
                     makeup={makeup}
                     url={url}/>
                 })}

@@ -45,7 +45,11 @@ class FavoritesController < ApplicationController
         puts params[:id]
         favorites = Favorite.find_by(makeup_id: params[:id])
         puts favorites
+        if favorites 
         favorites.destroy
         render json: favorites
+        else 
+            render json: {message: 'favorites does not exist'}, status: 404
+        end
     end
 end

@@ -1,13 +1,13 @@
 class MakeupsController < ApplicationController
     def index
         if params[:product_type].present? && params[:brand].present?
-            makeups = Makeup.where(product_type: params[:product_type], brand: params[:brand])
+            makeups = Makeup.where(product_type: params[:product_type], brand: params[:brand]).page params[:page]
         elsif params[:product_type].present? && params[:brand].nil?
-            makeups = Makeup.where(product_type: params[:product_type])
+            makeups = Makeup.where(product_type: params[:product_type]).page params[:page]
         elsif  params[:product_type].nil? && params[:brand].present?
-            makeups = Makeup.where(brand: params[:brand])
+            makeups = Makeup.where(brand: params[:brand]).page params[:page]
         else
-            makeups = Makeup.all
+            makeups = Makeup.all.page params[:page]
         end
         render json: makeups
     end

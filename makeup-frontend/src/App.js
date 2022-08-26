@@ -21,6 +21,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [displayedList, setDisplayedList] = useState([])
   const [myProductsList, setMyProductsList] = useState([])
+  const [page, setPage] = useState(1)
   
 
 
@@ -34,7 +35,7 @@ function App() {
       return prodType ? `&product_type=${prodType}` : ""
     }
 
-    const response = await fetch(`${url}makeups?&${checkBrand()}&${checkProdType()}`)
+    const response = await fetch(`${url}makeups?&${checkBrand()}&${checkProdType()}&page=${page}`)
     // const response = await fetch(`${url}makeups?${checkBrand()}${checkProdType()}`);
     
     const makeupsArray = await response.json();
@@ -71,6 +72,11 @@ function App() {
   }, [brand, prodType])
   
 
+  function ifImageError(id) {
+    setMakeups(makeups.filter(makeup => {
+      return makeup.id != id
+    }))
+  }
 
   const newDisplayedList = makeups.filter(makeup => {
     return makeup.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -184,7 +190,7 @@ function App() {
         <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url}/>}/>
         <Route path='/myproducts' element={<MyProducts deleteProduct={deleteProduct} makeupList={myProductsList} />}/>
         <Route path='/newproductform' element={<NewProductForm newProduct={newProduct}/>}/>
-        <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url} favorites={favorites}/>} />
+        <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url} favorites={favorites} ifImageError={ifImageError}/>} />
       </Routes>
       {/* <h2>Log in</h2>
       <form onSubmit={handleSubmit} ref={form}>
