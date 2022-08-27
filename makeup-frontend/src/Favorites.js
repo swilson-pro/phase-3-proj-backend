@@ -2,7 +2,7 @@ import FavoritesCard from "./FavoritesCard"
 import {useState} from 'react'
 
 
-function Favorites({favorites, removeFavorite, url}) {
+function Favorites({favorites, removeFavorite, url, ifImageErrorFave}) {
 
     
     return (
@@ -15,6 +15,7 @@ function Favorites({favorites, removeFavorite, url}) {
                     removeFavorite={removeFavorite}
                     favorite={favorite}
                     url={url}
+                    ifImageErrorFave={ifImageErrorFave}
                     />
                 })}
             </ul>

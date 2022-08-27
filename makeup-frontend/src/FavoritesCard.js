@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-function FavoritesCard ({favorite, removeFavorite, id, url}) {
+function FavoritesCard ({favorite, removeFavorite, id, url, ifImageErrorFave}) {
 
     const {brand, name, price, image_link, description} = favorite
 
@@ -18,7 +18,7 @@ function FavoritesCard ({favorite, removeFavorite, id, url}) {
 
     return (
         <li className='card'>
-            <img src={image_link} alt={name} />
+            <img src={image_link} alt={name} onError={() => ifImageErrorFave(id)}/>
             <h3>{name}</h3>
             <h4>{brand}</h4>
             <p>Price: {price}</p>

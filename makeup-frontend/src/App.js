@@ -16,7 +16,7 @@ function App() {
   const [companies, setCompanies] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-  const [brand, setBrand] = useState('');
+  const [brand, setBrand] = useState('maybelline');
   const [prodType, setProdType] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [displayedList, setDisplayedList] = useState([])
@@ -80,7 +80,15 @@ console.log(`${url}makeups?&${checkBrand()}&${checkProdType()}`, '`${url}makeups
 
   function ifImageError(id) {
     setMakeups(makeups.filter(makeup => {
+      console.log('makeup.id', makeup.id)
       return makeup.id != id
+    }))
+  }
+
+  function ifImageErrorFave(id) {
+    setFavorites(favorites.filter(favorite => {
+      console.log('favorite', favorite)
+      return favorite.id != id
     }))
   }
 
@@ -193,7 +201,7 @@ console.log(`${url}makeups?&${checkBrand()}&${checkProdType()}`, '`${url}makeups
     <div className="App">
       <NavBar />
       <Routes>
-        <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url}/>}/>
+        <Route path='/favorites' element={<Favorites favorites={favorites} removeFavorite={removeFavorite} url={url} ifImageErrorFave={ifImageErrorFave}/>}/>
         <Route path='/myproducts' element={<MyProducts deleteProduct={deleteProduct} makeupList={myProductsList} />}/>
         <Route path='/newproductform' element={<NewProductForm newProduct={newProduct}/>}/>
         <Route path='/' element={<Home makeups={newDisplayedList} companies={companies} productTypes={productTypes} updateBrand={updateBrand} brand={brand} updateProdType={updateProdType} prodType={prodType} searchTerm={searchTerm} setSearchTerm={setSearchTerm} removeFavorite={removeFavorite} newFavorite={newFavorite} url={url} favorites={favorites} ifImageError={ifImageError}/>} />
